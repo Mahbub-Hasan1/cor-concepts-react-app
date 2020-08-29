@@ -2,129 +2,54 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-let style={
-  color:'#fff',
-  backgroundColor:'#0866D6',
-  border: '2px solid #fff',
-  fontSize:'20px',
-  padding:'10px',
-  margin:'10px',
-  borderRadius:'0px 25px 0px 25px'
-}
-let wow = {
-  name: 'MD MAHBUB AHMED',
-  job: 'bangladesh'
-}
-
 function App() {
-  let nayoks = ['riz', 'robe', 'rakes', 'katar', 'wow', 'my', 'name', 'mahbub', 'ahmed']
-  let prodarck = [
-    {name: 'MD MAHBUB AHMED', prise:'$3000'},
-    {name: 'MD MAMUN AHMED', prise: '$4000'},
-    {name: 'MD MARUF AHMED', prise: '$5550'}
-  ]
-  
-  let nayoksName = nayoks.map(nayok => nayoks)
-  console.log(nayoksName)
+  const soudia = ['jolfa','kolfa','solfa','dolfa','molfa','alfa']
+  const hmm = ['wow', 'hello', 'good', 'nice'] 
+  const manus = [{name:'abol'},{name:'babol'},{name:'sabol'},{name:'kabol'}]
   return (
     <div className="App">
-      <header className="App-header">
-      <Counter></Counter>
-      <Users></Users>
-
+      {
+        soudia.map(julfa => <Nayok name={julfa}></Nayok>)
+      }
+      {
+        manus.map(men => <Nayok name={men.name}></Nayok>)
+      }
+        <Nayok name={'33333333'}></Nayok>
+        <Nayok name={hmm[1]}></Nayok>
         <img src={logo} className="App-logo" alt="logo" />
-        {
-          nayoks.map(nayok => <li>{nayok}</li>)
-        }
-        {
-          prodarck.map(prodarcke => <li>{prodarcke.name}{prodarcke.prise}</li>)
-        }
-        <ul>
-          <li>{nayoks[0]}</li>
-          <li>{nayoks[1]}</li>
-          <li>{nayoks[2]}</li>
-          <li>{nayoks[3]}</li>
-        </ul>
-        {
-          prodarck.map(pd=><Card prodarck={pd}></Card>)
-        }
-        <Card name={prodarck[0].name} prise={prodarck[0].prise}></Card>
-        <Card name={prodarck[1].name} prise={prodarck[1].prise}></Card>
-        <Card name={prodarck[2].name} prise={prodarck[2].prise}></Card>
-        <Card name={prodarck[0].name} prise={prodarck[1].prise}></Card>
+      <header className="App-header">
+      
+        <img src={logo} className="App-logo" alt="logo" />
+        
+        <Nayok name={hmm[0]}></Nayok>
+        <Nayok name={hmm[2]}></Nayok>
+        <Nayok name={hmm[3]}></Nayok>
 
-        <Md name='Md Mahbub Ahmed💖💖' desh='Bangladesh'></Md>
-        <Md name='Md Marup Ahmed💖💖' desh='us'></Md>
-        <Md name='Md Mamun Ahmed💖💖' desh='canada'></Md>
-        <Md name={wow.name}></Md>
-        <Md name={wow.job}></Md>
       </header>
     </div>
   );
 }
-function Users(){
-  const [users, setUsers] = useState([]);
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(res => res.json())
-    .then(data => setUsers(data));
-  },[])
+
+function Nayok(props){
+ 
+
+  const [count, setCount] = useState(5)
+  const handleClick = () => setCount(count + 1);
   return(
-    <div>
-      <h3>Dynamic Users:{users.length}</h3>
-      <ul>
-        {
-          users.map(user => <li>{user.email}</li>)
-        }
-      </ul>
+    <div style={{border:'2px solid red', margin:'5px'}}>
+      <h1>Md Mahbub Ahmed {count}</h1>
+      <button onClick={handleClick}>click me</button>
+      <h3>Bangladesh - {props.name ||'wow'}</h3>
+      <Mov noveis={count - 5}></Mov>
+      <Mov noveis={count - 5}></Mov>
     </div>
   )
 }
-function Counter(){
-  const [count, setCount] = useState(11)
-  const hendleIncrease = () => {setCount(count + 1);
-  }
-  const hendleDncrease = ()=> {setCount(count - 1)};
 
+function Mov(props){
   return (
-    <div>
-      <h1>count: {count}</h1>
-      <button onClick={hendleIncrease}>click me</button>
-      <button onClick={hendleDncrease}>click me.</button>
-    </div>
+  <h1>Movies{props.noveis}</h1>
   )
 }
-
-function Card(props) {
-  let styleCard={
-    backgroundColor: 'rgba(183, 0, 255, .50)',
-    height: '200px',
-    width: '200px',
-    color: 'ghostwhite',
-    margin:'5px',
-    fontSize: '15px',
-    border: '5px solid #F3831D',
-    borderRadius: '5px',
-    float: 'left' 
-  }
-  return (
-    <div style={styleCard}>
-      <h2>{props.name}</h2>
-      <h5>{props.prise}</h5>
-      <button>Bay now</button>
-    </div>
-  )
-}
-
-function Md(props){
-  return (
-    <div style={style}>
-      <h3>Name : {props.name}</h3>
-      <h5>Desh: {props.desh}</h5>
-      
-    </div>
-  )
-}
-
 
 export default App;
